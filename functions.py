@@ -9,13 +9,11 @@ def create_table(database_name, sql_table, column_names):
         sql_table, column_names["nodenames"], column_names["group_names"], column_names["edges_sources_names"], column_names["edges_targets_names"], column_names["groups_numerics"], column_names["edges_sources_numerics"], column_names["edges_targets_numerics"])
     sql.execute_query(database_name, query)
 
-
+# empty table
 def truncate_table(database_name, sql_table):
     sql.execute_query(database_name, "DELETE FROM %s" % sql_table)
 
 # * This is nescecary to use a color code given by plotly for the groups
-
-
 def create_numeric_node_group(database_name, sql_table, node_group, sql_groups_source):
     # empty target column in sql database
     sql.execute_query(
@@ -29,7 +27,7 @@ def create_numeric_node_group(database_name, sql_table, node_group, sql_groups_s
     for i in range(len(nodes_groups)):
         if ''.join(nodes_groups[i]) not in dictionary:
             dictionary[''.join(nodes_groups[i])] = 1 + k
-            k = k+1
+            k += 1
     # insert dictionary values into source target column
     for k in range(len(nodes_groups)):
         value = dictionary[nodes_groups[k][0]]
